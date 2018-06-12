@@ -1,18 +1,25 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { AppComponent } from './components/app.component';
+import { HomeComponent } from './components/home/home.component';
+import { AppConfigService } from './services/app-config.service';
 
 @NgModule({
-  declarations: [
-    AppComponent
+  declarations: [AppComponent, HomeComponent],
+  imports: [BrowserModule, HttpClientModule, AppRoutingModule],
+  providers: [
+    AppConfigService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (appConfigService: AppConfigService) => () =>
+        appConfigService.loadProfileProperties('dev'),
+      deps: [AppConfigService],
+      multi: true
+    }
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
-  providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

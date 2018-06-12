@@ -4,13 +4,27 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npm run start-dev",
+    "start-dev": "concurrently \"npm run start-server\" \"npm run start-ui\"",
+    "start-server": "nodemon",
+    "start-ui": "npm start --prefix ui",
+    "prod": "node server.js",
+    "build": "npm run build --prefix ui"
   },
   "author": "Shrinivas Shukla",
   "license": "MIT",
   "devDependencies": {
     "concurrently": "^3.5.1",
     "nodemon": "^1.17.5"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "compression": "^1.7.2",
+    "cors": "^2.8.4",
+    "debug": "^3.1.0",
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "helmet": "^3.12.1",
+    "morgan": "^1.9.0"
   }
 }

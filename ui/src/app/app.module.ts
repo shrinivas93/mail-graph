@@ -15,7 +15,7 @@ import { AppConfigService } from './services/app-config.service';
     {
       provide: APP_INITIALIZER,
       useFactory: (appConfigService: AppConfigService) => () =>
-        appConfigService.loadProfileProperties('dev'),
+        appConfigService.loadProperties(),
       deps: [AppConfigService],
       multi: true
     }
